@@ -336,8 +336,8 @@ const WeatherStatsDashboard = () => {
         setMostCommonWeather(null)
         if (newValue) {
             try {
-                const response = await fetch(`http://127.0.0.1:8000/weather/?latitude=${newValue.lat}&longitude=${newValue.lng}`);
-                if (response.ok) {
+                const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000'; // Fallback to localhost if not set
+                const response = await fetch(`${backendUrl}/weather/?latitude=${newValue.lat}&longitude=${newValue.lng}`); if (response.ok) {
                     const data = await response.json();
                     setApiData(data);
                 } else {
